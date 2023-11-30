@@ -41,7 +41,6 @@ namespace WebSoccer.Controllers
 		[ActionName("Index")]
 		public IActionResult IndexPost()
 		{
-			if (!ModelState.IsValid) { return BadRequest(); }
 			var claimsIdentity = (ClaimsIdentity)User.Identity;
 			var userId = Guid.Parse(claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value);
 			shoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart
