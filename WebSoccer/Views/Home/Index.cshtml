@@ -1,8 +1,89 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using WebSoccer.Utility.Helpers;
+@model List<Product>
+<style>
+	.price-config {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.price-config .price {
+		margin-right: 3px;
+		margin-left: 3px;
+	}
+</style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div>
+	<img src="~/client-site/images/poster.png" width="100%"/>
+</div>
+<div class="colorlib-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<h2 class="intro">It started with a simple idea: Create quality, well-designed products that I wanted myself.</h2>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="colorlib-product">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+				<h2>Sản phẩm mới</h2>
+			</div>
+		</div>
+		<div class="row row-pb-md">
+			@foreach (var item in Model)
+			{
+				<div class="col-lg-3 mb-4 text-center">
+					<div class="product-entry border">
+						<a asp-action="Details" asp-controller="Product" asp-route-productId="@item.Id">
+							@if (item.ProductImages != null && item.ProductImages.Count() > 0)
+							{
+								<img src="@item.ProductImages.FirstOrDefault().ImageUrl" class="card-img-top rounded" />
+							}
+							else
+							{
+								<img src="https://placehold.co/500x600/png" class="card-img-top rounded" />
+							}
+						</a>
+						<div class="desc">
+							<h2><a href="#">@item.Name</a></h2>
+							<span class="price">@item.Price.ToVnd()</span>
+							<span class="price"><del>@item.PromotionPrice.ToVnd()</del></span>
+							<span class="price"><a asp-action="Details" asp-controller="Product" asp-route-productId="@item.Id"><i class="bi bi-eye"></i></a></span>
+						</div>
+					</div>		
+				</div>
+			}
+		</div>
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<p><a asp-action="Index" asp-controller="Product" class="btn btn-primary btn-lg">Xem tất cả sản phẩm</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="colorlib-partner">
+	<div class="container">
+
+		<div class="row">
+			<div class="col partner-col text-center">
+				<img src="~/client-site/images/brand-1.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+			</div>
+			<div class="col partner-col text-center">
+				<img src="~/client-site/images/brand-2.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+			</div>
+			<div class="col partner-col text-center">
+				<img src="~/client-site/images/brand-3.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+			</div>
+			<div class="col partner-col text-center">
+				<img src="~/client-site/images/brand-4.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+			</div>
+			<div class="col partner-col text-center">
+				<img src="~/client-site/images/brand-5.jpg" class="img-fluid" alt="Free html4 bootstrap 4 template">
+			</div>
+		</div>
+	</div>
 </div>

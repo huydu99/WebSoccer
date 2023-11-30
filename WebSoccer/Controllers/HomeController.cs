@@ -1,32 +1,56 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Security.Claims;
+using WebSoccer.Models.ViewModels;
+using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using MailKit.Net.Smtp;
+using Microsoft.Extensions.Configuration;
+using System.Net;
+using System.Net.Mail;
+using WebSoccer.Utility.Helpers;
 
 namespace WebSoccer.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly INotyfService _notyf;
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, INotyfService notyf)
+        {
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+            _notyf = notyf;
+        }
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+        public IActionResult Index()
+        {
 
-		public IActionResult Index()
-		{
-			return View();
-		}
-
-		public IActionResult Privacy()
-		{
-			return View();
-		}
-
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+            List<Product> latestProducts = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages")
+                .OrderByDescending(x => x.CreateAt).Take(4).ToList();   
+            return View(latestProducts);
+        }
+        public IActionResult Contact() {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Contact(Contact contact)
+        {
+            var msg = "Tên: " + contact.Name + "\n";
+            msg += "Email: " + contact.Email + "\n";
+            msg += "Nội dung: " + contact.Message;
+            EmailSenderHelper.SendEmail(contact.Email, "dulionel27@gmail.com", contact.Subject, msg);
+            _notyf.Success("Gửi phản hồi thành công!");
+            return View();
+        }
+        public IActionResult About()
+        {
+            return View();
+        }
+    }
 }

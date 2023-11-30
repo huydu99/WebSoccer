@@ -1,0 +1,8 @@
+﻿@model List<Category>
+<li><a asp-action ="Index" asp-controller="Home">Trang chủ</a></li>
+<li><a asp-action="About" asp-controller="Home">Giới thiệu</a></li>
+@foreach(var item in Model)
+{
+    <li><a asp-action="Index" asp-controller="Category" asp-route-categoryId="@item.Id">@item.Name</a></li>
+}
+<li><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>

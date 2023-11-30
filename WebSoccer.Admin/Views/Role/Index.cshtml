@@ -1,0 +1,67 @@
+﻿@model List<ApplicationRole>
+<div class="main-content">
+    <div class="page-header">
+        <h2 class="header-title">Basic Table</h2>
+        <div class="header-sub-title">
+            <nav class="breadcrumb breadcrumb-dash">
+                <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+                <a class="breadcrumb-item" href="#">Tables</a>
+                <span class="breadcrumb-item active">Basic Table</span>
+            </nav>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="m-t-25">
+                <div class="table-responsive">
+                    <table id="tblData" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Phân quyền</th>
+                                <th scope="col">Mô tả</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.Description</td>                  
+                                    <td>
+                                        <div class="w-75 btn-group" style="wi" role="group">
+                                            <a asp-action="Edit" asp-controller="Role" asp-area="Admin" asp-route-roleId="@item.Id" class="btn btn-primary btn-tone m-r-5">
+                                                <i class="anticon anticon-edit"></i>
+                                            </a>                               
+                                        </div>
+                                    </td>
+                                </tr>                          
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            loadDataTable();
+        });
+        function loadDataTable() {
+            datatbl = $('#tblData').DataTable({
+                'ordering': true,
+                'order': [[0, 'asc']],
+                'paging': false,
+                'searching': false,
+                'info': false,
+                'autoWidth': false,
+                'lengChange': false,
+                'bordering': false,
+            });
+        }
+    </script>
+}
