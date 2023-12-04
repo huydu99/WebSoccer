@@ -53,8 +53,12 @@ namespace WebSoccer.DataAcess.Data
                     CategoryId = 2,
                     CreateAt = DateTime.Now,
                 });
-            //modelBuilder.Entity<IdentityUserClaim<Guid>>().
-            base.OnModelCreating(modelBuilder);
+   //         modelBuilder.Entity<IdentityUserClaim<Guid>>();
+   //         modelBuilder.Entity<IdentityUserRole<Guid>>().HasKey(x => new { x.UserId,x.RoleId }) ;
+			//modelBuilder.Entity<IdentityUserLogin<Guid>>().HasKey(x=>x.UserId);
+			//modelBuilder.Entity<IdentityRoleClaim<Guid>>();
+			//modelBuilder.Entity<IdentityUserToken<Guid>>().HasKey(x=>x.UserId);
+			base.OnModelCreating(modelBuilder);
         }
 
     }

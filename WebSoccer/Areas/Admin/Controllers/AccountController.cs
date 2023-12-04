@@ -106,7 +106,7 @@ namespace WebSoccer.Areas.Admin.Controllers
                 await _userManager.AddToRoleAsync(appUser, role.Name);
             }
             _notyf.Success("Đăng ký thành công");
-            return View("Index", "Home");
+            return RedirectToAction("Index","User");   
         }      
     }
 }

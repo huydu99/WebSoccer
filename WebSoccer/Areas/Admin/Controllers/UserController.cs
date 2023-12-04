@@ -54,7 +54,7 @@ namespace WebSoccer.Areas.Admin.Controllers
             ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u => u.Id == roleVM.ApplicationUser.Id);
             if (!(roleVM.ApplicationUser.Role == oldRole))
             {
-                _unitOfWork.ApplicationUser.Update(applicationUser);
+				_unitOfWork.ApplicationUser.Update(applicationUser);
                 _unitOfWork.Save();
                 _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(applicationUser, roleVM.ApplicationUser.Role).GetAwaiter().GetResult();

@@ -4,7 +4,7 @@ using System.Security.Claims;
 using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
 
-namespace eShopSoccer.ViewComponents
+namespace WebSoccer.ViewComponents
 {
     public class GetNameViewComponent : ViewComponent
     {

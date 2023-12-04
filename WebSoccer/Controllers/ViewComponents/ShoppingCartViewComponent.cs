@@ -4,7 +4,7 @@ using WebSoccer.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace eShopSoccer.Controllers.ViewComponents
+namespace WebSoccer.Controllers.ViewComponents
 {
     public class ShoppingCartViewComponent : ViewComponent
     {

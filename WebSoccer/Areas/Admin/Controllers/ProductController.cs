@@ -10,7 +10,7 @@ using System.Data;
 using WebSoccer.Utility;
 using AspNetCoreHero.ToastNotification.Abstractions;
 
-namespace eShopSoccer.Areas.Admin.Controllers
+namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class ProductController : Controller

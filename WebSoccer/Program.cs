@@ -10,7 +10,7 @@ using WebSoccer.Models;
 using WebSoccer.Utility;
 using WebSoccer.DataAccess.DbInitializer;
 using WebSoccer.Utility.Helpers;
-
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,9 +39,9 @@ builder.Services.AddSession(options =>
 	options.Cookie.IsEssential = true;
 });
 builder.Services.AddSignalR();
-builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

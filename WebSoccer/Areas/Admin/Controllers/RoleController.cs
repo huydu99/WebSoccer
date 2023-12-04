@@ -8,7 +8,7 @@ using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
 using WebSoccer.Models.ViewModels;
 
-namespace eShopSoccer.Areas.Admin.Controllers
+namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class RoleController : Controller

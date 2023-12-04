@@ -4,7 +4,7 @@ using WebSoccer.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace eShopSoccer.ViewComponents
+namespace WebSoccer.ViewComponents
 {
     public class GetCategoryViewComponent : ViewComponent
     {

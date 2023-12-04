@@ -8,7 +8,7 @@ using WebSoccer.Models;
 using WebSoccer.Models.ViewModels;
 using WebSoccer.Utility;
 
-namespace eShopSoccer.Areas.Admin.Controllers
+namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class OrderController : Controller

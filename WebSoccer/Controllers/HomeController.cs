@@ -41,9 +41,9 @@ namespace WebSoccer.Controllers
         [HttpPost]
         public IActionResult Contact(Contact contact)
         {
-            var msg = "Tên: " + contact.Name + "\n";
-            msg += "Email: " + contact.Email + "\n";
-            msg += "Nội dung: " + contact.Message;
+            var msg = "Tên: " + contact.Name + "<br>";
+            msg += "Email: " + contact.Email + "<br>";
+            msg += "Nội dung: " + contact.Message.Replace(Environment.NewLine, "<br>");
             EmailSenderHelper.SendEmail(contact.Email, "dulionel27@gmail.com", contact.Subject, msg);
             _notyf.Success("Gửi phản hồi thành công!");
             return View();

@@ -19,15 +19,8 @@ namespace WebSoccer.DataAccess.Repository
         }
         public void Update(ApplicationUser obj)
         {
-            var user = _context.ApplicationUsers.FirstOrDefault(u => u.Id == obj.Id);   
-            if(user != null)
-            {
-                user.FirstName = obj.FirstName; 
-                user.LastName = obj.LastName;   
-                user.PhoneNumber = obj.PhoneNumber;
-                user.Address = obj.Address; 
-            }
-        }
+			_context.ApplicationUsers.Update(obj);
+		}
 
     }
 }

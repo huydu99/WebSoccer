@@ -79,7 +79,7 @@ namespace WebSoccer.Controllers
                 return View(registerVM);
             }
 
-            var role = _unitOfWork.ApplicationRole.Get(x => x.Id == registerVM.RoleId);
+            var role = "Admin";
             var user = await _userManager.FindByNameAsync(registerVM.UserName);
             if (user != null)
             {
