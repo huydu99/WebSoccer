@@ -12,8 +12,8 @@ using WebSoccer.DataAcess.Data;
 namespace WebSoccer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231130082918_Update-All")]
-    partial class UpdateAll
+    [Migration("20231213100546_AddPaymentIntentId")]
+    partial class AddPaymentIntentId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -282,7 +282,7 @@ namespace WebSoccer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9270),
+                            CreateAt = new DateTime(2023, 12, 13, 17, 5, 46, 694, DateTimeKind.Local).AddTicks(7261),
                             Description = "1",
                             Name = "A",
                             Status = true,
@@ -291,7 +291,7 @@ namespace WebSoccer.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9282),
+                            CreateAt = new DateTime(2023, 12, 13, 17, 5, 46, 694, DateTimeKind.Local).AddTicks(7268),
                             Description = "1",
                             Name = "B",
                             Status = true,
@@ -396,11 +396,17 @@ namespace WebSoccer.DataAccess.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
 
+                    b.Property<string>("PaymentIntentId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("PaymentStatus")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SessionId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ShippingDate")
@@ -469,7 +475,7 @@ namespace WebSoccer.DataAccess.Migrations
                             Id = 1,
                             Brand = 0,
                             CategoryId = 1,
-                            CreateAt = new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9380),
+                            CreateAt = new DateTime(2023, 12, 13, 17, 5, 46, 694, DateTimeKind.Local).AddTicks(7383),
                             Description = "Cơm chiên với trứng",
                             Name = "Cơm chiên",
                             Price = 30000.0,
@@ -484,7 +490,7 @@ namespace WebSoccer.DataAccess.Migrations
                             Id = 2,
                             Brand = 0,
                             CategoryId = 2,
-                            CreateAt = new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9382),
+                            CreateAt = new DateTime(2023, 12, 13, 17, 5, 46, 694, DateTimeKind.Local).AddTicks(7385),
                             Description = "Cháo gà",
                             Name = "Cháo gà",
                             Price = 30000.0,

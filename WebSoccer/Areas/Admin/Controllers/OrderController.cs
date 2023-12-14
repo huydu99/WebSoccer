@@ -1,6 +1,7 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Stripe;
 using System.Security.Claims;
 using WebSoccer.DataAccess.Repository;
 using WebSoccer.DataAccess.Repository.IRepository;
@@ -89,6 +90,17 @@ namespace WebSoccer.Areas.Admin.Controllers
         public IActionResult CancelOrder()
         {
             var orderheader = _unitOfWork.OrderHeader.Get(x => x.Id == OrderVM.OrderHeader.Id);
+            if(orderheader.PaymemtMethod == "Online")
+            {
+                var options = new RefundCreateOptions()
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderheader.PaymentIntentId
+                };
+                var service = new RefundService();
+                Refund refund = service.Create(options);
+                _unitOfWork.OrderHeader.UpdateStatus(orderheader.Id, SD.StatusCancelled, SD.PaymentRefund);
+            }
             _unitOfWork.OrderHeader.UpdateStatus(orderheader.Id, SD.StatusCancelled);
             _unitOfWork.Save();
             _notyf.Success("Đã huỷ đơn hàng");

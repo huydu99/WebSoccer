@@ -190,6 +190,7 @@ namespace WebSoccer.DataAccess.Migrations
                     OrderTotal = table.Column<double>(type: "float", nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -345,22 +346,22 @@ namespace WebSoccer.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreateAt", "Description", "ImageUrl", "Name", "Status", "UpdateAt" },
-                values: new object[] { 1, new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9270), "1", null, "A", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8226), "1", null, "A", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreateAt", "Description", "ImageUrl", "Name", "Status", "UpdateAt" },
-                values: new object[] { 2, new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9282), "1", null, "B", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 2, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8235), "1", null, "B", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Brand", "CategoryId", "CreateAt", "Description", "Name", "Price", "PromotionPrice", "Quantity", "ShortDescription", "Status", "UpdateAt" },
-                values: new object[] { 1, 0, 1, new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9380), "Cơm chiên với trứng", "Cơm chiên", 30000.0, 25000.0, 0, "Cơm", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 0, 1, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8302), "Cơm chiên với trứng", "Cơm chiên", 30000.0, 25000.0, 0, "Cơm", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Brand", "CategoryId", "CreateAt", "Description", "Name", "Price", "PromotionPrice", "Quantity", "ShortDescription", "Status", "UpdateAt" },
-                values: new object[] { 2, 0, 2, new DateTime(2023, 11, 30, 15, 29, 18, 480, DateTimeKind.Local).AddTicks(9382), "Cháo gà", "Cháo gà", 30000.0, 25000.0, 0, "Cháo", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 2, 0, 2, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8304), "Cháo gà", "Cháo gà", 30000.0, 25000.0, 0, "Cháo", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

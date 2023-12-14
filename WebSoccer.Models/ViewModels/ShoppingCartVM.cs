@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace WebSoccer.Models.ViewModels {
-	public class ShoppingCartVM {	
-		public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
-        public OrderHeader OrderHeader { get; set; }   
+	public class ShoppingCartVM {
+        public IEnumerable<ShoppingCart> ShoppingCartList { get; set; }
+        public OrderHeader OrderHeader { get; set; }     
     }
 }

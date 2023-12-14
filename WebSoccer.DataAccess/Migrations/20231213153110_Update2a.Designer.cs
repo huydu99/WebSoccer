@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebSoccer.DataAcess.Data;
 
@@ -11,9 +12,10 @@ using WebSoccer.DataAcess.Data;
 namespace WebSoccer.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231213153110_Update2a")]
+    partial class Update2a
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -280,7 +282,7 @@ namespace WebSoccer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1171),
+                            CreateAt = new DateTime(2023, 12, 13, 22, 31, 9, 899, DateTimeKind.Local).AddTicks(9242),
                             Description = "1",
                             Name = "A",
                             Status = true,
@@ -289,7 +291,7 @@ namespace WebSoccer.DataAccess.Migrations
                         new
                         {
                             Id = 2,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1191),
+                            CreateAt = new DateTime(2023, 12, 13, 22, 31, 9, 899, DateTimeKind.Local).AddTicks(9271),
                             Description = "1",
                             Name = "B",
                             Status = true,
@@ -394,10 +396,6 @@ namespace WebSoccer.DataAccess.Migrations
                     b.Property<double>("OrderTotal")
                         .HasColumnType("float");
 
-                    b.Property<string>("PaymemtMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("PaymentDate")
                         .HasColumnType("datetime2");
 
@@ -480,7 +478,7 @@ namespace WebSoccer.DataAccess.Migrations
                             Id = 1,
                             Brand = 0,
                             CategoryId = 1,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1384),
+                            CreateAt = new DateTime(2023, 12, 13, 22, 31, 9, 899, DateTimeKind.Local).AddTicks(9354),
                             Description = "Cơm chiên với trứng",
                             Name = "Cơm chiên",
                             Price = 30000.0,
@@ -495,7 +493,7 @@ namespace WebSoccer.DataAccess.Migrations
                             Id = 2,
                             Brand = 0,
                             CategoryId = 2,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1386),
+                            CreateAt = new DateTime(2023, 12, 13, 22, 31, 9, 899, DateTimeKind.Local).AddTicks(9356),
                             Description = "Cháo gà",
                             Name = "Cháo gà",
                             Price = 30000.0,

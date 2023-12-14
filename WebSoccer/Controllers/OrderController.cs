@@ -4,6 +4,7 @@ using WebSoccer.Models.ViewModels;
 using WebSoccer.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Stripe;
 
 namespace WebSoccer.Controllers
 {
@@ -29,6 +30,25 @@ namespace WebSoccer.Controllers
                 OrderDetail = _unitOfWork.OrderDetail.GetAll(x => x.OrderHeaderId == orderId, includeProperties: "Product")
             };
             return View(orderVM);
+        }
+        [HttpPost]
+        public IActionResult CancelOrder()
+        {
+            var orderheader = _unitOfWork.OrderHeader.Get(x => x.Id == OrderVM.OrderHeader.Id);
+            if (orderheader.PaymemtMethod == "Online")
+            {
+                var options = new RefundCreateOptions()
+                {
+                    Reason = RefundReasons.RequestedByCustomer,
+                    PaymentIntent = orderheader.PaymentIntentId
+                };
+                var service = new RefundService();
+                Refund refund = service.Create(options);
+                _unitOfWork.OrderHeader.UpdateStatus(orderheader.Id, SD.StatusCancelled, SD.PaymentRefund);
+            }
+            _unitOfWork.OrderHeader.UpdateStatus(orderheader.Id, SD.StatusCancelled);
+            _unitOfWork.Save();
+            return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
         }
         #region API CALL
         public IActionResult GetAll(string status)

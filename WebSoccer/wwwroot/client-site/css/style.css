@@ -195,7 +195,9 @@ th {
 
 label {
   display: inline-block;
-  margin-bottom: 0.5rem; }
+  margin-bottom: 0.5rem; 
+  font-weight:500;
+}
 
 button {
   border-radius: 0; }
@@ -4216,7 +4218,8 @@ input[type="button"].btn-block {
   .list-group-item:last-child {
     margin-bottom: 0;
     border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem; }
+    border-bottom-left-radius: 0.25rem; 
+  }
   .list-group-item:hover, .list-group-item:focus {
     z-index: 1;
     text-decoration: none; }

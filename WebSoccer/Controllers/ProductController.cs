@@ -185,7 +185,7 @@ namespace WebSoccer.Controllers
 		}
 
 		[HttpPost]
-        public IActionResult AddComment(int productId, string text, int rating =1 )
+        public IActionResult AddComment(int productId, string text, int rating = 1 )
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
             var userId = Guid.Parse(claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value);

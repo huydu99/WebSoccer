@@ -23,7 +23,6 @@ namespace WebSoccer.DataAcess.Data
         public DbSet<Comment> Comments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "A", Status=true ,Description="1"},
                 new Category { Id = 2, Name = "B", Status = true, Description = "1" } 

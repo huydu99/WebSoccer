@@ -11,6 +11,7 @@ using WebSoccer.Utility;
 using WebSoccer.DataAccess.DbInitializer;
 using WebSoccer.Utility.Helpers;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+
 builder.Services.ConfigureApplicationCookie(options => {
 	options.LoginPath = "/Account/Login";
 	options.LogoutPath = "/Account/Logout";
@@ -61,7 +65,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 app.UseRouting();
 app.UseAuthentication(); ;
 app.UseAuthorization();

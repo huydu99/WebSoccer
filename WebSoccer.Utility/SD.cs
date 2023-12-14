@@ -27,6 +27,7 @@ namespace WebSoccer.Utility
         //OrderPaymentOnline
         public const string PaymentStatusCOD = "Chưa thanh toán";
         public const string PaymentStatusApproved = "Đã thanh toán";
+        public const string PaymentRefund = "Đã hoàn tiền";
         //StatusCateogy
         public const string Active = "Hoạt động";
         public const string Inactive = "Ngừng hoạt động";

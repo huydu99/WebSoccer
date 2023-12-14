@@ -1,7 +1,14 @@
 ﻿@using WebSoccer.Utility.Helpers;
 @model OrderVM
+<style>
+    .btn-custom{
+        background-color:red;
+    }
 
-
+    .bg-config{
+        background:black;
+    }
+</style>
 <div class="breadcrumbs">
     <div class="container">
         <div class="row">
@@ -95,17 +102,22 @@
                                                 </div>
                                             </li>
                                         }
-                                        <li class="list-group-item badge-success">
+                                        <li class="bg-config list-group-item badge-success">
                                             <div class="row container">
                                                 <div class="col-6">
-                                                    <h5>Tổng:</h5>
+                                                    <h5 class="text-white">Tổng:</h5>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                    <h5>@Model.OrderHeader.OrderTotal.ToVnd()</h5>
+                                                    <h5 class="text-white">@Model.OrderHeader.OrderTotal.ToVnd()</h5>
                                                 </div>
                                             </div>
-                                        </li>                             
-                                    </ul>
+                                        </li>       
+                                    </ul>                        
+                                    @if (Model.OrderHeader.OrderStatus != SD.StatusCancelled &&
+                                    Model.OrderHeader.OrderStatus != SD.StatusShipped)
+                                    {
+                                        <button asp-action="CancelOrder" type="submit" class="btn btn-custom m-r-5 form-control my-1">Huỷ đơn hàng</button>
+                                    }                
                                 </div>
                             </div>
                         </form>
