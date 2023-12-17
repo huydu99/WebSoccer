@@ -1,6 +1,10 @@
 ﻿@using WebSoccer.Utility.Helpers;
 @model ShoppingCartVM
-
+<style>
+    .config-bg{
+        background:black;
+    }
+</style>
 
 <div class="breadcrumbs">
     <div class="container">
@@ -94,13 +98,13 @@
                                                 </div>
                                             </li>
                                         }
-                                        <li class="list-group-item badge-success">
+                                        <li class="config-bg list-group-item badge-success">
                                             <div class="row container">
                                                 <div class="col-6">
-                                                    <h5>Tổng:</h5>
+                                                    <h5 class="text-light">Tổng:</h5>
                                                 </div>
                                                 <div class="col-6 text-end">
-                                                    <h5>@Model.OrderHeader.OrderTotal.ToVnd()</h5>
+                                                    <h5 class="text-light">@Model.OrderHeader.OrderTotal.ToVnd()</h5>
                                                 </div>
                                             </div>
                                         </li>

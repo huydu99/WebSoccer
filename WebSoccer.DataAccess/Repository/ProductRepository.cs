@@ -30,7 +30,6 @@ namespace WebSoccer.DataAccess.Repository
                 objFromDb.ShortDescription = obj.ShortDescription;  
                 objFromDb.Price = obj.Price;
                 objFromDb.UpdateAt = DateTime.Now;
-                objFromDb.PromotionPrice = obj.PromotionPrice;    
                 objFromDb.CategoryId = obj.CategoryId;
                 objFromDb.ProductImages = obj.ProductImages;
             }

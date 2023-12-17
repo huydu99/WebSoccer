@@ -35,8 +35,6 @@ namespace WebSoccer.Models
 
         [Required]
         public double Price { get; set; }
-        [Required]
-        public double PromotionPrice { get; set; }
         [Required(ErrorMessage ="Vui lòng chọn danh mục")]
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]

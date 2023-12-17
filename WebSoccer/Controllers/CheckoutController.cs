@@ -129,7 +129,7 @@ namespace WebSoccer.Controllers
                 }
             }          
             EmailSenderHelper.SendEmail("dulionel27@gmail.com", orderHeader.ApplicationUser.Email, "Đơn hàng",
-				$"<p>Bạn đã đặt một đơn hàng mới {orderHeader.Id}</p>");
+				$"<p>Bạn đã đặt một đơn hàng mới #{orderHeader.Id}</p>");
 		
 			List<ShoppingCart> shoppingCarts = _unitOfWork.ShoppingCart
 				.GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();

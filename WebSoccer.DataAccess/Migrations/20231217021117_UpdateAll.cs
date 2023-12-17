@@ -179,17 +179,44 @@ namespace WebSoccer.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Message",
+                columns: table => new
+                {
+                    SenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReceiverId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Message", x => new { x.SenderId, x.ReceiverId });
+                    table.ForeignKey(
+                        name: "FK_Message_AspNetUsers_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Message_AspNetUsers_SenderId",
+                        column: x => x.SenderId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderHeaders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PaymemtMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ShippingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderTotal = table.Column<double>(type: "float", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentIntentId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SessionId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -346,22 +373,12 @@ namespace WebSoccer.DataAccess.Migrations
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "CreateAt", "Description", "ImageUrl", "Name", "Status", "UpdateAt" },
-                values: new object[] { 1, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8226), "1", null, "A", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "CreateAt", "Description", "ImageUrl", "Name", "Status", "UpdateAt" },
-                values: new object[] { 2, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8235), "1", null, "B", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, new DateTime(2023, 12, 17, 9, 11, 17, 2, DateTimeKind.Local).AddTicks(354), "1", null, "Câu lạc bộ", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "Id", "Brand", "CategoryId", "CreateAt", "Description", "Name", "Price", "PromotionPrice", "Quantity", "ShortDescription", "Status", "UpdateAt" },
-                values: new object[] { 1, 0, 1, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8302), "Cơm chiên với trứng", "Cơm chiên", 30000.0, 25000.0, 0, "Cơm", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
-
-            migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "Id", "Brand", "CategoryId", "CreateAt", "Description", "Name", "Price", "PromotionPrice", "Quantity", "ShortDescription", "Status", "UpdateAt" },
-                values: new object[] { 2, 0, 2, new DateTime(2023, 12, 13, 17, 3, 24, 453, DateTimeKind.Local).AddTicks(8304), "Cháo gà", "Cháo gà", 30000.0, 25000.0, 0, "Cháo", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { 1, 0, 1, new DateTime(2023, 12, 17, 9, 11, 17, 2, DateTimeKind.Local).AddTicks(440), "Barcelona Barcelona", "Barcelona", 30000.0, 25000.0, 0, "Barcelona", true, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -411,6 +428,11 @@ namespace WebSoccer.DataAccess.Migrations
                 name: "IX_Comments_ProductId",
                 table: "Comments",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Message_ReceiverId",
+                table: "Message",
+                column: "ReceiverId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_OrderHeaderId",
@@ -467,6 +489,9 @@ namespace WebSoccer.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Comments");
+
+            migrationBuilder.DropTable(
+                name: "Message");
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Security.Policy;
+using WebSoccer.DataAccess.Repository;
 using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
 using WebSoccer.Models.ViewModels;
@@ -41,14 +42,14 @@ namespace WebSoccer.Areas.Admin.Controllers
             if (!_appRole.RoleExistsAsync(role.Name).GetAwaiter().GetResult())
             {
                  _appRole.CreateAsync(new ApplicationRole { Name = role.Name, Description = role.Description }).GetAwaiter().GetResult();
-                _notyf.Success("Tạo phân quyền thành công");
             }
             return RedirectToAction("Index", "Role");
         }
         [HttpGet]
-        public async Task<IActionResult> Edit(string roleId)
+        public async Task<IActionResult> Edit(Guid id)
         {
-            var roles = await _appRole.FindByIdAsync(roleId);
+            var newroleId = id.ToString();
+            var roles = await _appRole.FindByIdAsync(newroleId);
             return View(roles);
         }
         [HttpPost]
@@ -56,17 +57,27 @@ namespace WebSoccer.Areas.Admin.Controllers
         {
             if (!ModelState.IsValid) { return View(roleVM); }
             var roledB = await _appRole.FindByNameAsync(roleVM.Name);
-            if(roledB != null) {
-                _notyf.Error("Phân quyền này đã tồn tại");
-                return View(roleVM);
-            }
-            var role = new ApplicationRole()
-            {
-                Name = roleVM.Name,
-                Description = roleVM.Description,
-            };
-            await _appRole.UpdateAsync(role);
+       
+            roledB.Description = roleVM.Description;
+            await _appRole.UpdateAsync(roledB);
             return RedirectToAction("Index");
+        }
+        #region APICALL
+        public IActionResult GetAll()
+        {
+            List<ApplicationRole> roles = _appRole.Roles.ToList();
+            return Json(new { data = roles });
+        }
+        #endregion
+        public async Task<IActionResult> Delete(string id)
+        {
+            var role = await _appRole.FindByIdAsync(id);
+            if(role == null)
+            {
+                return NotFound();
+            }
+            await _appRole.DeleteAsync(role);
+            return Json(new { success = true, message = "Xoá thành công!" });
         }
 
     }

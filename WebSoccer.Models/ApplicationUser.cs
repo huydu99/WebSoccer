@@ -22,5 +22,7 @@ namespace WebSoccer.Models {
         public string Address { get; set; }
         [NotMapped]
         public string Role { get; set; }
+        public ICollection<Message> SentMessages { get; set; }
+        public ICollection<Message> ReceivedMessages { get; set; }
     }
 }

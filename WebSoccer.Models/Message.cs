@@ -9,16 +9,10 @@ namespace WebSoccer.Models
 {
     public class Message 
     {
-        public int Id { get; set; } 
-        public int ConversationId { get;set; }
-        [ForeignKey("ConversationId")]
-        public Conversation Conversation { get; set; }
         public Guid SenderId { get; set; }
-        [ForeignKey("SenderId")]
-        public ApplicationUser AppSenderId { get; set; }
+        public ApplicationUser AppSender { get; set; }
         public Guid ReceiverId { get; set; }
-        [ForeignKey("ReceiverId")]
-        public ApplicationUser AppReceiverId { get; set; }
+        public ApplicationUser AppReceiver { get; set; }
         public string Content { get; set; } 
         public DateTime Timestamp {  get; set; }
     }

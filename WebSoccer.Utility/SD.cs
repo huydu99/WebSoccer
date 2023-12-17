@@ -35,7 +35,7 @@ namespace WebSoccer.Utility
         public const string InStock = "Còn hàng";
         public const string OutOfStock = "Hết hàng";
         //PageSize
-        public const int PageSize = 2;
+        public const int PageSize = 4;
         //Session Cart
         public const string SessionCart = "SessionCart";
         //Display

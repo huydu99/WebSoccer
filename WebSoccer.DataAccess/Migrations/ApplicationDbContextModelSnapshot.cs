@@ -280,18 +280,9 @@ namespace WebSoccer.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1171),
+                            CreateAt = new DateTime(2023, 12, 17, 10, 8, 25, 867, DateTimeKind.Local).AddTicks(7846),
                             Description = "1",
-                            Name = "A",
-                            Status = true,
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1191),
-                            Description = "1",
-                            Name = "B",
+                            Name = "Câu lạc bộ",
                             Status = true,
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -332,6 +323,29 @@ namespace WebSoccer.DataAccess.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("WebSoccer.Models.Message", b =>
+                {
+                    b.Property<Guid>("SenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ReceiverId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SenderId", "ReceiverId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("Message", (string)null);
                 });
 
             modelBuilder.Entity("WebSoccer.Models.OrderDetail", b =>
@@ -452,9 +466,6 @@ namespace WebSoccer.DataAccess.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<double>("PromotionPrice")
-                        .HasColumnType("float");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -480,28 +491,12 @@ namespace WebSoccer.DataAccess.Migrations
                             Id = 1,
                             Brand = 0,
                             CategoryId = 1,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1384),
-                            Description = "Cơm chiên với trứng",
-                            Name = "Cơm chiên",
+                            CreateAt = new DateTime(2023, 12, 17, 10, 8, 25, 867, DateTimeKind.Local).AddTicks(7951),
+                            Description = "Barcelona Barcelona",
+                            Name = "Barcelona",
                             Price = 30000.0,
-                            PromotionPrice = 25000.0,
                             Quantity = 0,
-                            ShortDescription = "Cơm",
-                            Status = true,
-                            UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Brand = 0,
-                            CategoryId = 2,
-                            CreateAt = new DateTime(2023, 12, 14, 9, 8, 37, 988, DateTimeKind.Local).AddTicks(1386),
-                            Description = "Cháo gà",
-                            Name = "Cháo gà",
-                            Price = 30000.0,
-                            PromotionPrice = 25000.0,
-                            Quantity = 0,
-                            ShortDescription = "Cháo",
+                            ShortDescription = "Barcelona",
                             Status = true,
                             UpdateAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -632,6 +627,23 @@ namespace WebSoccer.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("WebSoccer.Models.Message", b =>
+                {
+                    b.HasOne("WebSoccer.Models.ApplicationUser", "AppReceiver")
+                        .WithMany("ReceivedMessages")
+                        .HasForeignKey("ReceiverId")
+                        .IsRequired();
+
+                    b.HasOne("WebSoccer.Models.ApplicationUser", "AppSender")
+                        .WithMany("SentMessages")
+                        .HasForeignKey("SenderId")
+                        .IsRequired();
+
+                    b.Navigation("AppReceiver");
+
+                    b.Navigation("AppSender");
+                });
+
             modelBuilder.Entity("WebSoccer.Models.OrderDetail", b =>
                 {
                     b.HasOne("WebSoccer.Models.OrderHeader", "OrderHeader")
@@ -701,6 +713,13 @@ namespace WebSoccer.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("WebSoccer.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("ReceivedMessages");
+
+                    b.Navigation("SentMessages");
                 });
 
             modelBuilder.Entity("WebSoccer.Models.Product", b =>

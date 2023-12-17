@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <p class="bread"><span><a asp-action="Index" asp-controller="Home">Trang chủ</a></span>/<span><a asp-action="Index" asp-controller="Product">Sản phẩm</a></span> / <span>Product Details</span></p>
+                <p class="bread"><span><a asp-action="Index" asp-controller="Home">Trang chủ</a></span>/<span><a asp-action="Index" asp-controller="Product">Sản phẩm</a></span> / <span>Chi tiết sản phẩm</span></p>
             </div>
         </div>
     </div>
@@ -58,14 +58,6 @@
                     <h3>@Model.ShoppingCart.Product.Name</h3>
                     <p class="price">
                         <span>@Model.ShoppingCart.Product.Price.ToVnd()</span>
-                        <span class="rate">
-                            <i class="icon-star-full"></i>
-                            <i class="icon-star-full"></i>
-                            <i class="icon-star-full"></i>
-                            <i class="icon-star-full"></i>
-                            <i class="icon-star-half"></i>
-                            (74 Rating)
-                        </span>
                     </p>
                     <div class="size-wrap">
                         <div class="block-26 mb-2">

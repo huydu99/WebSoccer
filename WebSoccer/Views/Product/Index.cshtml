@@ -50,7 +50,7 @@
 				<option value="all">Mặc định</option>
 				<option value="lowtohigh">Từ thấp đến cao</option>
 				<option value="hightolow">Từ cao đến thấp</option>
-				<option value="az ">Từ A-Z</option>
+				<option value="az">Từ A-Z</option>
 			</select>
 		</div>
 		<div class="col-lg-12">
@@ -71,7 +71,6 @@
 								<div class="desc">
 									<h2><a href="#">@item.Name</a></h2>
 									<span class="price">@item.Price.ToVnd()</span>
-									<span class="price"><del>@item.PromotionPrice.ToVnd()</del></span>
 									<span class="price"><a asp-action="Details" asp-controller="Product" asp-route-productId="@item.Id"><i class="bi bi-eye"></i></a></span>
 								</div>
 							</div>

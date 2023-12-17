@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using WebSoccer.DataAccess.Configuration;
 
 namespace WebSoccer.DataAcess.Data
 {
@@ -21,35 +21,23 @@ namespace WebSoccer.DataAcess.Data
         public DbSet<OrderHeader> OrderHeaders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Message> Messages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new MessageConfiguration());
             modelBuilder.Entity<Category>().HasData(
-                new Category { Id = 1, Name = "A", Status=true ,Description="1"},
-                new Category { Id = 2, Name = "B", Status = true, Description = "1" } 
+                new Category { Id = 1, Name = "Câu lạc bộ", Status=true ,Description="1"}
                 );
             modelBuilder.Entity<Product>().HasData(
                 new Product
                 {
                     Id = 1,
-                    Name = "Cơm chiên",
-                    ShortDescription = "Cơm",
-                    Description = "Cơm chiên với trứng",
+                    Name = "Barcelona",  
+                    ShortDescription = "Barcelona",
+                    Description = "Barcelona Barcelona",
                     Status = true,
-                    PromotionPrice = 25000,
                     Price = 30000,
-                    CategoryId = 1,         
-                    CreateAt = DateTime.Now,
-                },
-                new Product
-                {
-                    Id = 2,
-                    Name = "Cháo gà",  
-                    ShortDescription = "Cháo",
-                    Description = "Cháo gà",
-                    Status = true,
-                    PromotionPrice = 25000,
-                    Price = 30000,
-                    CategoryId = 2,
+                    CategoryId = 1,
                     CreateAt = DateTime.Now,
                 });
    //         modelBuilder.Entity<IdentityUserClaim<Guid>>();

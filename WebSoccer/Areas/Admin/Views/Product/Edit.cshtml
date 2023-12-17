@@ -59,12 +59,7 @@
                             <span asp-validation-for="Product.Price" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label class="font-weight-semibold" asp-for="Product.PromotionPrice">Giá khuyến mãi</label>
-                            <input type="text" class="form-control" asp-for="Product.PromotionPrice" placeholder="Mô tả" />
-                            <span asp-validation-for="Product.PromotionPrice" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label class="font-weight-semibold" asp-for="Product.PromotionPrice">Brand</label>
+                            <label class="font-weight-semibold">Brand</label>
                             <select asp-for="Product.Brand" class="form-control">
                                 @foreach(var item in Enum.GetValues(typeof(Brand)))
                                 {

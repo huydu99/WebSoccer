@@ -24,20 +24,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach(var item in Model)
-                            {
-                                <tr>
-                                    <td>@item.Name</td>
-                                    <td>@item.Description</td>                  
-                                    <td>
-                                        <div class="w-75 btn-group" style="wi" role="group">
-                                            <a asp-action="Edit" asp-controller="Role" asp-area="Admin" asp-route-roleId="@item.Id" class="btn btn-primary btn-tone m-r-5">
-                                                <i class="anticon anticon-edit"></i>
-                                            </a>                               
-                                        </div>
-                                    </td>
-                                </tr>                          
-                            }
                         </tbody>
                     </table>
                 </div>
@@ -48,20 +34,63 @@
 
 @section Scripts{
     <script>
+        var datatbl;
         $(document).ready(function () {
             loadDataTable();
         });
         function loadDataTable() {
             datatbl = $('#tblData').DataTable({
                 'ordering': true,
-                'order': [[0, 'asc']],
+                'order': [[2, 'desc']],
                 'paging': false,
-                'searching': false,
+                'searching': true,
                 'info': false,
                 'autoWidth': false,
                 'lengChange': false,
                 'bordering': false,
+                "ajax": { url: '/admin/role/getall' },
+                "columns": [
+                    { data: 'name', "width": "20%" },
+                    { data: 'description', "width": "25%" },
+                    {
+                        data: 'id',
+                        "render": function (data) {
+                            return ` <div class="w-75 btn-group" role="group">
+                                                <a href="/admin/role/edit?id=${data}" class="btn btn-primary btn-tone m-r-5">
+                                                           <i class="anticon anticon-edit"></i>
+                                                </a>
+                                                    <a onClick=Delete('/admin/role/delete/${data}') class="btn btn-danger btn-tone m-r-5 delete-btn">
+                                                            <i class="anticon anticon-delete"></i>
+                                                </a>
+                                            </div>`
+                        },
+                        "width": "10%"
+                    },
+                ]
             });
+        }
+
+        function Delete(url) {
+            Swal.fire({
+                title: 'Bạn có muốn xoá?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý!',
+                cancelButtonText: "Huỷ"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            datatbl.ajax.reload();
+                            toastr.success(data.message);
+                        }
+                    })
+                }
+            })
         }
     </script>
 }

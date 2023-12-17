@@ -32,7 +32,7 @@ namespace WebSoccer.Controllers
         {
 
             List<Product> latestProducts = _unitOfWork.Product.GetAll(includeProperties: "Category,ProductImages")
-                .OrderByDescending(x => x.CreateAt).Take(4).ToList();   
+                .OrderByDescending(x => x.UpdateAt).Take(4).ToList();   
             return View(latestProducts);
         }
         public IActionResult Contact() {
