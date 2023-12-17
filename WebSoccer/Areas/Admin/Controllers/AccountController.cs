@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
 using WebSoccer.Models.ViewModels;
+using WebSoccer.Utility;
 
 namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

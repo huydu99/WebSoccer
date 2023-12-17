@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class UserController : Controller
     { 
         private readonly ApplicationDbContext _context;

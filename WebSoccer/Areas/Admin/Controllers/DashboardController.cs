@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class DashboardController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
@@ -30,7 +31,7 @@ namespace WebSoccer.Areas.Admin.Controllers
             {
                 totalProducts += order.Count;
             }
-            var orderheader = _unitOfWork.OrderHeader.GetAll().Count();
+            var orderheader = _unitOfWork.OrderHeader.GetAll().Where(x => x.OrderStatus == SD.StatusShipped).Count();
             ViewBag.TotalOrder = orderheader;
             ViewBag.Total = total.ToVnd();
             ViewBag.TotalUsers = totalusers;

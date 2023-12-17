@@ -8,10 +8,12 @@ using WebSoccer.DataAccess.Repository;
 using WebSoccer.DataAccess.Repository.IRepository;
 using WebSoccer.Models;
 using WebSoccer.Models.ViewModels;
+using WebSoccer.Utility;
 
 namespace WebSoccer.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class RoleController : Controller
     {
         private readonly RoleManager<ApplicationRole> _appRole;
